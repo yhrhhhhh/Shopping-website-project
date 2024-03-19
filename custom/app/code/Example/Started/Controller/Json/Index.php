@@ -3,9 +3,10 @@ namespace Example\Started\Controller\Json;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 
-class Index extends Action
+class Index implements HttpGetActionInterface
 {
     protected $resultJsonFactory;
 
@@ -13,7 +14,7 @@ class Index extends Action
         Context $context,
         JsonFactory $resultJsonFactory
     ) {
-        parent::__construct($context);
+//        parent::__construct($context);
         $this->resultJsonFactory = $resultJsonFactory;
     }
 
