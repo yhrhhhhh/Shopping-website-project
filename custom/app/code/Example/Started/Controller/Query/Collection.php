@@ -32,4 +32,4 @@ class Collection implements HttpGetActionInterface
 
         return $this->jsonFactory->create()->setData($res);
     }
-}
+}#02
