@@ -22,6 +22,6 @@ class Block2 implements HttpGetActionInterface
     public function execute()
     {
         return $this->pageFactory->create()
-            ->addHandle('example_started_category_list');
+            ->addHandle('Example_Started_category_list');
     }
 }
