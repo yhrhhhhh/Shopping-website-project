@@ -1,0 +1,9 @@
+<?php
+/** @var \Example\Started\Block\RawQuery $block */
+?>
+
+<ul>
+    <?php foreach ($block->getQueryResults() as $result): ?>
+        <li><?= $result['entity_id'] ?> - <?= $result['path'] ?></li>
+    <?php endforeach; ?>
+</ul>
