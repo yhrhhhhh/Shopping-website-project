@@ -1,0 +1,11 @@
+<?php
+/** @var \Example\Started\Block\CategoryList $block2 */
+?>
+
+
+
+<ul>
+    <?php foreach ($block2->getCategoryCollection() as $category): ?>
+        <li><?= $category->getName() ?></li>
+    <?php endforeach; ?>
+</ul>
