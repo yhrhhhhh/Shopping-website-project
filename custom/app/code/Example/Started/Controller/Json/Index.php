@@ -7,7 +7,7 @@ use Magento\Framework\Controller\Result\JsonFactory;
 
 class Index implements HttpGetActionInterface
 {
-    protected $resultJsonFactory;
+    protected JsonFactory $resultJsonFactory;
 
     public function __construct(JsonFactory $resultJsonFactory)
     {
