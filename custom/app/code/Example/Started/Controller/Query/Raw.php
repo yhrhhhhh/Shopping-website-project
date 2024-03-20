@@ -7,11 +7,11 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 class Raw implements HttpGetActionInterface
 {
     private AdapterInterface $connection;
-
     private JsonFactory $jsonFactory;
 
     public function __construct(ResourceConnection $connection, JsonFactory $jsonFactory)
@@ -25,14 +25,20 @@ class Raw implements HttpGetActionInterface
      *
      * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
-        $select = $this->connection->select()
-            ->from('catalog_category_entity')
-            ->columns(['entity_id', 'path'])
-            ->order('entity_id DESC')
-            ->limitPage(1, 20);
+        try {
+            $select = $this->connection->select()
+                ->from('catalog_category_entity')
+                ->columns(['entity_id', 'path'])
+                ->order('entity_id DESC')
+                ->limitPage(1, 20);
 
-        return $this->jsonFactory->create()->setData($this->connection->fetchAll($select));
+            $result = $this->connection->fetchAll($select);
+            return $this->jsonFactory->create()->setData($result);
+        } catch (LocalizedException $e) {
+            // Handle exception here, for example log or return error response
+            return $this->jsonFactory->create()->setData(['error' => $e->getMessage()]);
+        }
     }
 }
