@@ -5,6 +5,9 @@
     <body>
         <referenceContainer name="content">
             <block name="example.started.view" class="Magento\Framework\View\Element\Template" template="Example_Started::view.phtml" />
+
+            <!-- 新增查询功能的布局定义 -->
+            <block name="example.started.rawquery" class="Example\Started\Controller\Block\RawQuery" template="Example_Started::raw_query.phtml" />
         </referenceContainer>
     </body>
 
