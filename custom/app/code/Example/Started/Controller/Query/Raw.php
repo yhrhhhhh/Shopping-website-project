@@ -41,4 +41,4 @@ class Raw implements HttpGetActionInterface
             return $this->jsonFactory->create()->setData(['error' => $e->getMessage()]);
         }
     }
-}
+}#01php
