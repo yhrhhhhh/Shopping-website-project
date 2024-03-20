@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+
+    <body>
+        <referenceContainer name="content">
+            <!-- 新增查询功能的布局定义 -->
+            <block name="example.started.rawquery" class="Example\Started\Block\RawQuery" template="Example_Started::raw_query.phtml" />
+        </referenceContainer>
+    </body>
+
+</page>
