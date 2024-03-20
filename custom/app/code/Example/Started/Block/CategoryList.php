@@ -9,6 +9,8 @@ class CategoryList extends Template
 {
     protected $categoryCollectionFactory;
 
+    protected $_template = 'category_list.phtml';
+
     public function __construct(
         Template\Context $context,
         CollectionFactory $categoryCollectionFactory,
