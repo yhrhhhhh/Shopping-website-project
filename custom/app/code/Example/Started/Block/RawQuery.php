@@ -9,6 +9,8 @@ class RawQuery extends Template
 {
     protected $connection;
 
+    protected $_template = 'raw_query.phtml';
+
     public function __construct(
         Template\Context $context,
         ResourceConnection $resource,
