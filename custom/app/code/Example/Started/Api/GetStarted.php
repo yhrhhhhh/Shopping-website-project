@@ -2,7 +2,7 @@
 
 namespace Example\Started\Api;
 
-use Example\Started\Model\ResourceModel\Post\Collection;
+use Example\Started\Model\ResourceModel\GetStarted\Collection;
 
 class GetStarted implements GetStartedInterface
 {

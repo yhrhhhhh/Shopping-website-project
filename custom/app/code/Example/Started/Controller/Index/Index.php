@@ -5,22 +5,22 @@ class Index extends \Magento\Framework\App\Action\Action
 {
     protected $_pageFactory;
 
-    protected $_postFactory;
+    protected $getStartedFactory;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Example\Started\Model\PostFactory $postFactory
+        \Example\Started\Model\GetStartedFactory $getStartedFactory
     )
     {
         $this->_pageFactory = $pageFactory;
-        $this->_postFactory = $postFactory;
+        $this->getStartedFactory = $getStartedFactory;
         return parent::__construct($context);
     }
 
     public function execute()
     {
-        $post = $this->_postFactory->create();
+        $post = $this->getStartedFactory->create();
         $collection = $post->getCollection();
         foreach($collection as $item){
             echo "<pre>";
