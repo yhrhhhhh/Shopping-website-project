@@ -12,6 +12,21 @@ class UpgradeSchema implements UpgradeSchemaInterface
 {
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
+        $setup->startSetup();
+
+        if (version_compare($context->getVersion(), '1.1.0', '<')) {
+            $this->createPostTable($setup);
+        }
+
+        $setup->endSetup();
+    }
+
+    /**
+     * @param SchemaSetupInterface $setup
+     * @return void
+     */
+    public function createPostTable(SchemaSetupInterface $setup): void
+    {
         $tableName = 'get_started2';
 
         if ($setup->tableExists($tableName)) {
@@ -19,7 +34,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             return;
         }
         echo 'Creating table.';
-        $setup->startSetup();
 
         $table = $setup->getConnection()
             ->newTable($tableName)
@@ -103,7 +117,5 @@ class UpgradeSchema implements UpgradeSchemaInterface
             ['name', 'url_key', 'post_content', 'tags', 'featured_image'],
             AdapterInterface::INDEX_TYPE_FULLTEXT
         );
-
-        $setup->endSetup();
     }
 }
