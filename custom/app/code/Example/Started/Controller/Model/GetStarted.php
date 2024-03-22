@@ -2,7 +2,7 @@
 
 namespace Example\Started\Controller\Model;
 
-use Example\Started\Api\GetStartedInterface;
+use Example\Started\Api\RecordListInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
@@ -10,12 +10,12 @@ use Magento\Framework\Controller\ResultInterface;
 class GetStarted implements HttpGetActionInterface
 {
     private JsonFactory $jsonFactory;
-    private GetStartedInterface $getStarted;
+    private RecordListInterface $recordList;
 
-    public function __construct(JsonFactory $jsonFactory, GetStartedInterface $getStarted)
+    public function __construct(JsonFactory $jsonFactory, RecordListInterface $recordList)
     {
         $this->jsonFactory = $jsonFactory;
-        $this->getStarted = $getStarted;
+        $this->recordList = $recordList;
     }
 
     /**
@@ -27,7 +27,7 @@ class GetStarted implements HttpGetActionInterface
      */
     public function execute()
     {
-        $records = $this->getStarted->getAllRecords();
+        $records = $this->recordList->getAllRecords();
 
         $res = [];
         /** @var \Example\Started\Model\Post $record */
@@ -35,7 +35,7 @@ class GetStarted implements HttpGetActionInterface
             $res[] = $record->toArray();
         }
 
-        $result = ['res' => $res, 'arr' => $this->getStarted->getAllRecordsArray()];
+        $result = ['res' => $res, 'arr' => $this->recordList->getAllRecordsArray()];
 
         return $this->jsonFactory->create()->setData($result);
     }

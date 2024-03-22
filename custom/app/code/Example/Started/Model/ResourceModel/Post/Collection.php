@@ -2,11 +2,12 @@
 
 namespace Example\Started\Model\ResourceModel\Post;
 
-use Example\Started\Api\GetStartedInterface;
+use Example\Started\Api\RecordListInterface;
 use Example\Started\Model\Post;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
+use Example\Started\Model\ResourceModel\Post as PostResourceModel;
 
-class Collection extends AbstractCollection implements GetStartedInterface
+class Collection extends AbstractCollection implements RecordListInterface
 {
     /**
      * Define resource model
@@ -15,7 +16,7 @@ class Collection extends AbstractCollection implements GetStartedInterface
      */
     protected function _construct()
     {
-        $this->_init(Post::class, \Example\Started\Model\ResourceModel\Post::class);
+        $this->_init(Post::class, PostResourceModel::class);
     }
 
     /**

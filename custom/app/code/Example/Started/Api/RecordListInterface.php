@@ -2,7 +2,7 @@
 
 namespace Example\Started\Api;
 
-interface GetStartedInterface
+interface RecordListInterface
 {
     /**
      * Retrieve all records from get_started table
