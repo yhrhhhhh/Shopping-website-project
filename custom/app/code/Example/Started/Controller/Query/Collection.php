@@ -10,12 +10,12 @@ use Magento\Framework\Controller\ResultInterface;
 class Collection implements HttpGetActionInterface
 {
     private JsonFactory $jsonFactory;
+
+    // todo 替换已废弃的类
     private CategoryCollectionFactory $categoryCollectionFactory;
 
-    public function __construct(
-        JsonFactory $jsonFactory,
-        CategoryCollectionFactory $categoryCollectionFactory
-    ) {
+    public function __construct(JsonFactory $jsonFactory, CategoryCollectionFactory $categoryCollectionFactory)
+    {
         $this->jsonFactory = $jsonFactory;
         $this->categoryCollectionFactory = $categoryCollectionFactory;
     }
@@ -32,4 +32,4 @@ class Collection implements HttpGetActionInterface
 
         return $this->jsonFactory->create()->setData($res);
     }
-}#02
+}

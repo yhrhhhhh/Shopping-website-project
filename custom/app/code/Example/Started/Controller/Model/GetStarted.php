@@ -4,10 +4,8 @@ namespace Example\Started\Controller\Model;
 
 use Example\Started\Api\GetStartedInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
-use Magento\Framework\Exception\NotFoundException;
 
 class GetStarted implements HttpGetActionInterface
 {
@@ -32,7 +30,7 @@ class GetStarted implements HttpGetActionInterface
         $records = $this->getStarted->getAllRecords();
 
         $res = [];
-        /** @var \Example\Started\Model\ResourceModel\GetStarted $record */
+        /** @var \Example\Started\Model\GetStarted $record */
         foreach ($records as $record) {
             $res[] = $record->toArray();
         }

@@ -7,7 +7,7 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\DB\Adapter\AdapterInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Throwable;
 
 class Raw implements HttpGetActionInterface
 {
@@ -36,9 +36,9 @@ class Raw implements HttpGetActionInterface
 
             $result = $this->connection->fetchAll($select);
             return $this->jsonFactory->create()->setData($result);
-        } catch (LocalizedException $e) {
+        } catch (Throwable $e) {
             // Handle exception here, for example log or return error response
             return $this->jsonFactory->create()->setData(['error' => $e->getMessage()]);
         }
     }
-}#01php
+}

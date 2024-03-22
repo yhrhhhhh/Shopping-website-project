@@ -5,7 +5,7 @@ namespace Example\Started\Controller\Query;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\PageFactory;
 
-class Block2 implements HttpGetActionInterface
+class BlockTwo implements HttpGetActionInterface
 {
     private PageFactory $pageFactory;
 
@@ -17,11 +17,11 @@ class Block2 implements HttpGetActionInterface
     /**
      * @inheritDoc
      *
-     * @link http://start.kyoye.com/started/query/block2
+     * @link http://start.kyoye.com/started/query/blocktwo
      */
     public function execute()
     {
         return $this->pageFactory->create()
-            ->addHandle('Example_Started_category_list');
+            ->addHandle('example_started_category_list');
     }
 }

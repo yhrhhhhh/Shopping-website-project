@@ -1,33 +1,35 @@
 <?php
+
 namespace Example\Started\Controller\Index;
 
-class Index extends \Magento\Framework\App\Action\Action
+use Example\Started\Model\GetStartedFactory;
+use Magento\Framework\App\Action\Context;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+
+class Index implements HttpGetActionInterface
 {
-    protected $_pageFactory;
+    protected JsonFactory $jsonFactory;
 
-    protected $getStartedFactory;
+    protected GetStartedFactory $getStartedFactory;
 
-    public function __construct(
-        \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $pageFactory,
-        \Example\Started\Model\GetStartedFactory $getStartedFactory
-    )
+    public function __construct(Context $context, JsonFactory $jsonFactory, GetStartedFactory $getStartedFactory)
     {
-        $this->_pageFactory = $pageFactory;
+        $this->jsonFactory = $jsonFactory;
         $this->getStartedFactory = $getStartedFactory;
-        return parent::__construct($context);
     }
 
     public function execute()
     {
         $post = $this->getStartedFactory->create();
         $collection = $post->getCollection();
-        foreach($collection as $item){
-            echo "<pre>";
-            print_r($item->getData());
-            echo "</pre>";
+
+        $res = [];
+        /** @var \Example\Started\Model\GetStarted $item */
+        foreach ($collection as $item) {
+            $res[] = $item->toArray();
         }
-        exit();
-        return $this->_pageFactory->create();
+
+        return $this->jsonFactory->create()->setData($res);
     }
 }

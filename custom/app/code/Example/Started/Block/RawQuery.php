@@ -2,20 +2,19 @@
 
 namespace Example\Started\Block;
 
+use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\App\ResourceConnection;
 
 class RawQuery extends Template
 {
-    protected $connection;
+    protected AdapterInterface $connection;
 
     protected $_template = 'raw_query.phtml';
 
-    public function __construct(
-        Template\Context $context,
-        ResourceConnection $resource,
-        array $data = []
-    ) {
+    public function __construct(Context $context, ResourceConnection $resource, array $data = [])
+    {
         $this->connection = $resource->getConnection();
         parent::__construct($context, $data);
     }

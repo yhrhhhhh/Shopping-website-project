@@ -11,7 +11,6 @@ class Index implements HttpGetActionInterface
 
     public function __construct(JsonFactory $resultJsonFactory)
     {
-//        parent::__construct($context);
         $this->resultJsonFactory = $resultJsonFactory;
     }
 
