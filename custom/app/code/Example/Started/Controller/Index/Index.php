@@ -2,7 +2,7 @@
 
 namespace Example\Started\Controller\Index;
 
-use Example\Started\Model\PostFactory;
+use Example\Started\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
@@ -11,9 +11,9 @@ class Index implements HttpGetActionInterface
 {
     protected JsonFactory $jsonFactory;
 
-    protected PostFactory $postFactory;
+    protected CollectionFactory $postFactory;
 
-    public function __construct(Context $context, JsonFactory $jsonFactory, PostFactory $postFactory)
+    public function __construct(Context $context, JsonFactory $jsonFactory, CollectionFactory $postFactory)
     {
         $this->jsonFactory = $jsonFactory;
         $this->postFactory = $postFactory;
@@ -21,8 +21,7 @@ class Index implements HttpGetActionInterface
 
     public function execute()
     {
-        $post = $this->postFactory->create();
-        $collection = $post->getCollection();
+        $collection = $this->postFactory->create();
 
         $res = [];
         /** @var \Example\Started\Model\Post $item */
