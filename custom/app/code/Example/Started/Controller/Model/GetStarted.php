@@ -2,6 +2,7 @@
 
 namespace Example\Started\Controller\Model;
 
+use Example\Started\Api\Data\PostInterface;
 use Example\Started\Api\RecordListInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
@@ -30,9 +31,9 @@ class GetStarted implements HttpGetActionInterface
         $records = $this->recordList->getAllRecords();
 
         $res = [];
-        /** @var \Example\Started\Model\Post $record */
+        /** @var PostInterface $record */
         foreach ($records as $record) {
-            $res[] = $record->toArray();
+            $res[] = $record->getPostId();
         }
 
         $result = ['res' => $res, 'arr' => $this->recordList->getAllRecordsArray()];
