@@ -30,7 +30,7 @@ class GetStarted implements HttpGetActionInterface
         $records = $this->getStarted->getAllRecords();
 
         $res = [];
-        /** @var \Example\Started\Model\GetStarted $record */
+        /** @var \Example\Started\Model\Post $record */
         foreach ($records as $record) {
             $res[] = $record->toArray();
         }

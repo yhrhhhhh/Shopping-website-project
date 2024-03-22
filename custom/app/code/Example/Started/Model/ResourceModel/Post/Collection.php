@@ -1,9 +1,9 @@
 <?php
 
-namespace Example\Started\Model\ResourceModel\GetStarted;
+namespace Example\Started\Model\ResourceModel\Post;
 
 use Example\Started\Api\GetStartedInterface;
-use Example\Started\Model\GetStarted;
+use Example\Started\Model\Post;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection implements GetStartedInterface
@@ -15,7 +15,7 @@ class Collection extends AbstractCollection implements GetStartedInterface
      */
     protected function _construct()
     {
-        $this->_init(GetStarted::class, \Example\Started\Model\ResourceModel\GetStarted::class);
+        $this->_init(Post::class, \Example\Started\Model\ResourceModel\Post::class);
     }
 
     /**
