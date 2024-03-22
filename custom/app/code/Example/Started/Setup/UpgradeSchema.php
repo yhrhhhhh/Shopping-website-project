@@ -4,21 +4,21 @@ namespace Example\Started\Setup;
 
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\DB\Ddl\Table;
-use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\Setup\UpgradeSchemaInterface;
 
-class InstallSchema implements InstallSchemaInterface
+class UpgradeSchema implements UpgradeSchemaInterface
 {
-
-    public function install(SchemaSetupInterface $setup, ModuleContextInterface $context)
+    public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-        $tableName = 'get_started';
+        $tableName = 'get_started2';
 
         if ($setup->tableExists($tableName)) {
             echo 'Table exists!';
             return;
         }
+        echo 'Creating table.';
         $setup->startSetup();
 
         $table = $setup->getConnection()
@@ -89,17 +89,7 @@ class InstallSchema implements InstallSchemaInterface
                 null,
                 ['nullable' => false, 'default' => Table::TIMESTAMP_INIT_UPDATE],
                 'Updated At')
-            ->setComment('Post Table')
-            ->addIndex(
-                $tableName,
-                $setup->getIdxName(
-                    $tableName,
-                    ['name', 'url_key', 'post_content', 'tags', 'featured_image'],
-                    AdapterInterface::INDEX_TYPE_FULLTEXT
-                ),
-                ['name', 'url_key', 'post_content', 'tags', 'featured_image'],
-                AdapterInterface::INDEX_TYPE_FULLTEXT
-            );
+            ->setComment('Post Table');
 
         $setup->getConnection()->createTable($table);
 
