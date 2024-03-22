@@ -21,7 +21,7 @@ class GetStarted implements HttpGetActionInterface
     /**
      * Execute action based on request and return result
      *
-     * http://start.kyoye.com/started/model/getSTarted
+     * http://start.kyoye.com/started/model/getStarted
      *
      * @return ResultInterface
      */

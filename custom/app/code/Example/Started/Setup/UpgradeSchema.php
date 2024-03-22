@@ -14,7 +14,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
     {
         $setup->startSetup();
 
-        if (version_compare($context->getVersion(), '1.1.0', '<')) {
+        if (version_compare($context->getVersion(), '1.1.2', '<')) {
             $this->createPostTable($setup);
         }
 
@@ -27,7 +27,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
      */
     public function createPostTable(SchemaSetupInterface $setup): void
     {
-        $tableName = 'get_started2';
+        $tableName = 'post';
 
         if ($setup->tableExists($tableName)) {
             echo 'Table exists!';
@@ -72,7 +72,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             )
             ->addColumn(
                 'tags',
-                Table::TYPE_TEXT,
+                Table::TYPE_TEXT, // 等同于 varchar(255)
                 255,
                 [],
                 'Post Tags'
@@ -86,7 +86,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             )
             ->addColumn(
                 'featured_image',
-                Table::TYPE_TEXT,
+                Table::TYPE_TEXT, // 等同于 varchar(255)
                 255,
                 [],
                 'Post Featured Image'
@@ -107,15 +107,20 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
         $setup->getConnection()->createTable($table);
 
+        /**
+         * 适合做索引的字段特征:
+         * 1. 唯一性强，例如UID、Email、phone
+         * 2. 字段类型是可控的、较短的，text 类型就明显不行
+         * 3. 内容有意义的字段
+         */
         $setup->getConnection()->addIndex(
             $tableName,
             $setup->getIdxName(
                 $tableName,
-                ['name', 'url_key', 'post_content', 'tags', 'featured_image'],
-                AdapterInterface::INDEX_TYPE_FULLTEXT
+                ['name', 'url_key', 'tags'],
+                AdapterInterface::INDEX_TYPE_INDEX
             ),
-            ['name', 'url_key', 'post_content', 'tags', 'featured_image'],
-            AdapterInterface::INDEX_TYPE_FULLTEXT
+            ['name', 'url_key', 'tags']
         );
     }
 }

@@ -8,8 +8,7 @@ class GetStarted extends AbstractDb
 {
     protected function _construct()
     {
-        $this->_init('get_started', 'id'); // 'get_started' 为数据库表名，'id' 为主键字段名
+        /** @see \Example\Started\Setup\UpgradeSchema::createPostTable */
+        $this->_init('post', 'post_id');
     }
-
-    // 其他操作方法...
 }
